@@ -1,4 +1,13 @@
-/* 1. ตั้งค่าพื้นฐาน (Reset) */
+/* =========================================
+   1. ตั้งค่าพื้นฐาน (Global Settings)
+   ========================================= */
+:root {
+    --primary-green: #2e7d32;   /* สีเขียวหลัก */
+    --text-dark: #333333;       /* สีตัวอักษรเข้ม */
+    --text-light: #666666;      /* สีตัวอักษรจาง */
+    --bg-color: #f4f6f8;        /* สีพื้นหลังเว็บ */
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,101 +15,288 @@
 }
 
 body {
-    font-family: sans-serif; /* ใช้ฟอนต์มาตรฐานเครื่อง */
+    font-family: 'Kanit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
     line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
 }
 
-/* 2. ส่วนหัว (Header) */
+/* =========================================
+   2. ส่วนหัว (Header) - ปรับปรุงใหม่
+   ========================================= */
 .main-header {
+    /* รูปภาพพื้นหลัง */
+    background-image: url('https://www.charnveeresortkhaoyai.com/wp-content/uploads/2023/04/Rancho-Jan-7-1.jpg.webp'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #333; /* สีสำรองกรณีรูปไม่โหลด */
+
+    /* ขนาด */
+    height: 500px; /* สูงสะใจ */
+    width: 100%;
+    margin-bottom: 3rem;
+
+    /* การจัดวาง */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 2rem;
-    background-color: #ddd; /* สีพื้นหลังเทา เพื่อแยกส่วนหัวชัดเจน */
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #ccc;
+    position: relative;
+    
+    /* แก้ไข: ลบ background-attachment: fixed ออก เพื่อแก้ปัญหาแถบสี */
 }
 
-/* 3. โครงสร้างหลัก (Grid Layout) */
+/* แผ่นฟิล์มสีดำจางๆ ทับรูป (Overlay) */
+.main-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* สีดำจาง 50% อ่านตัวหนังสือชัด */
+    z-index: 1;
+}
+
+/* กล่องข้อความ */
+.header-overlay {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    padding: 0 20px;
+}
+
+/* หัวข้อใหญ่ (H1) */
+.main-header h1 {
+    font-size: 5.5rem; /* ขนาดใหญ่พิเศษ */
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    line-height: 1.1;
+    text-shadow: 4px 4px 15px rgba(0,0,0,0.6); /* เงาเข้ม */
+    letter-spacing: 2px;
+}
+
+/* คำบรรยาย (P) */
+.main-header p {
+    font-size: 1.8rem; /* ขนาดใหญ่อ่านง่าย */
+    font-weight: 300;
+    opacity: 0.95;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+   3. โครงสร้างเนื้อหา (Grid Layout)
+   ========================================= */
 .container {
     max-width: 1200px;
-    margin: 0 auto; /* จัดกึ่งกลางหน้าจอ */
-    padding: 0 1rem;
+    margin: 0 auto;
+    padding: 0 20px 80px 20px;
     
-    /* สั่งให้เป็นตาราง */
     display: grid;
-    /* แบ่งคอลัมน์อัตโนมัติ: อย่างน้อยกว้าง 300px ถ้าจอใหญ่ก็เพิ่มจำนวนช่องเอง */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem; /* ระยะห่างระหว่างกล่อง */
+    /* จัดคอลัมน์อัตโนมัติ (มือถือ 1, จอใหญ่ 3) */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
 }
 
-/* 4. ตัวการ์ด (Card) - เน้นขอบเขตชัดเจน */
+/* =========================================
+   4. การ์ดและการตกแต่ง (Card Design)
+   ========================================= */
 .travel-card {
-    background-color: #fff;
-    border: 1px solid #ccc; /* เส้นขอบชัดเจน */
-    border-radius: 8px; /* มนนิดๆ พอสวยงาม */
-    padding: 1rem;      /* เว้นระยะข้างใน */
+    background: white;
+    border-radius: 12px;
+    overflow: hidden; /* บังคับภาพให้อยู่ในกรอบโค้ง */
+    
+    /* เงาปกติ */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    
     display: flex;
-    flex-direction: column; /* เรียงเนื้อหาลงมาแนวตั้ง */
+    flex-direction: column;
+    
+    /* ตั้งค่า Animation ให้นุ่มนวล */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+    cursor: pointer;
 }
 
-/* จัดการรูปภาพไม่ให้ล้น */
+/* เอฟเฟกต์ตอนชี้การ์ด (Hover) */
+.travel-card:hover {
+    transform: translateY(-12px); /* ลอยขึ้น */
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15); /* เงาลึก */
+    border-color: transparent;
+}
+
+/* =========================================
+   5. รูปภาพและเอฟเฟกต์แสง (Images & Shine)
+   ========================================= */
+.card-image {
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+}
+
 .card-image img {
     width: 100%;
-    height: 200px;      /* บังคับความสูงให้เท่ากัน */
-    object-fit: cover;  /* ตัดภาพส่วนเกินออก */
-    border-radius: 4px;
+    height: 100%;
+    object-fit: cover;
     display: block;
-    margin-bottom: 1rem;
+    transition: transform 0.8s ease; /* ซูมช้าๆ */
 }
 
-/* 5. เนื้อหาภายในการ์ด */
+/* รูปซูมตอนชี้ */
+.travel-card:hover .card-image img {
+    transform: scale(1.15);
+}
+
+/* แสงวิ้งๆ วิ่งผ่านรูป (Shine Effect) */
+.card-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: 0.7s;
+    z-index: 1;
+}
+
+.travel-card:hover .card-image::after {
+    left: 150%; /* วิ่งตัดผ่านรูป */
+}
+
+/* =========================================
+   6. เนื้อหาภายในการ์ด (Content)
+   ========================================= */
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .card-content h2 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: #000;
+    font-size: 1.4rem;
+    color: var(--primary-green);
+    margin: 0.5rem 0 0.2rem 0;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.travel-card:hover .card-content h2 {
+    color: #1b5e20; /* เปลี่ยนสีเข้มขึ้นตอนชี้ */
 }
 
 .location {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .desc {
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-    flex-grow: 1; /* ดัน Footer ลงล่างสุด */
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
 }
 
-/* ป้ายกำกับ (Badge) - ตกแต่งพื้นฐาน */
+/* =========================================
+   7. ป้ายกำกับ (Badges)
+   ========================================= */
 .badge {
-    display: inline-block;
-    background-color: #eee;
-    padding: 2px 8px;
+    align-self: flex-start;
+    padding: 4px 10px;
+    border-radius: 6px;
     font-size: 0.8rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-bottom: 0.5rem;
+    font-weight: 500;
+    background-color: #f1f8e9;
+    color: var(--primary-green);
+    border: 1px solid #c8e6c9;
 }
 
-/* ส่วนท้ายการ์ด */
+/* สีแยกตามประเภท */
+.badge.relax { background-color: #e3f2fd; color: #1565c0; border-color: #bbdefb; }
+.badge.adv { background-color: #ffebee; color: #c62828; border-color: #ffcdd2; }
+.badge.photo { background-color: #f3e5f5; color: #6a1b9a; border-color: #e1bee7; }
+
+/* =========================================
+   8. ส่วนท้าย (Footer & Card Footer)
+   ========================================= */
 .card-footer {
-    padding-top: 0.5rem;
-    border-top: 1px solid #eee; /* เส้นคั่นบางๆ */
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
 }
 
 .time {
-    font-size: 0.85rem;
-    color: #555;
+    font-size: 0.9rem;
+    color: #888;
 }
 
-/* 6. ส่วนท้ายเว็บ (Footer) */
 footer {
     text-align: center;
     padding: 2rem;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    color: #888;
     margin-top: 2rem;
-    background-color: #333;
-    color: #fff;
+}
+
+/* =========================================
+   9. รองรับ JavaScript (Animation & Button)
+   ========================================= */
+
+/* คลาสสำหรับ Scroll Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ปุ่ม Back to Top */
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    background-color: var(--primary-green);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#backToTop:hover {
+    background-color: #1b5e20;
+    transform: translateY(-5px);
+}
+
+/* =========================================
+   10. การแสดงผลบนมือถือ (Responsive)
+   ========================================= */
+@media (max-width: 768px) {
+    .main-header { 
+        height: 350px; /* ลดความสูงลง */
+    }
+    .main-header h1 { 
+        font-size: 3rem; /* ลดขนาดตัวหนังสือลงไม่ให้ล้นจอ */
+    }
+    .main-header p {
+        font-size: 1.2rem;
+    }
 }
