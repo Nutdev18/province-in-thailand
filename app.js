@@ -14,3 +14,6 @@ function revealOnScroll() {
 
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
+
+console.log("เว็บไซด์นี้สร้างขึ้นเพื่อส่งอาจารย์ในวิชา Web Application Development เท่านั้น");
+console.log("ขออนญาติใช้ภาพจาก Google เพื่อการศึกษา ไม่ได้มีเจตนาในเชิงพาณิชย์ใดๆ");
