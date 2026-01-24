@@ -6,13 +6,13 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background:linear-gradient(135deg, #67748c, #d0e6ff, #686f7b);
+  background: linear-gradient(135deg, #6e7a8a, #c6d9ef, #98a2ae);
   color: #333;
 }
 
 /* Welcome */
 .welcome {
-  background:linear-gradient(135deg, #37fa48, #b5f05c, #0bf64d);
+  background:linear-gradient(135deg, #0a775a, #8cfc7f, #108f4d);
   text-align: center;
   padding: 10px;
   font-weight: bold;
@@ -20,7 +20,7 @@ body {
 
 /* Header */
 .header {
-  background: linear-gradient(135deg, #0b61ad, #5baafe, #1257c5);
+  background: linear-gradient(135deg, #1c7efe, #92c7ff, #2280fa);
   color: white;
   text-align: center;
   padding: 60px 20px;
@@ -43,7 +43,7 @@ body {
 }
 
 .navbar a:hover {
-  background: #6f64f3;
+  background: #3235f5;
 }
 
 /* Layout */
